@@ -1,7 +1,7 @@
 
 # RBV-SIN: Retinal blood vessel segmentation and inpainting networks with multi-level self-attention
 
-This repository contains the implementation of the paper ***Retinal blood vessel segmentation and inpainting networks with multi-level self-attention*** available at [Paper Link TBD]()
+This repository contains the implementation of the paper ***Retinal blood vessel segmentation and inpainting networks with multi-level self-attention*** available at [TBD]()
 
 ## Licence notice
 
@@ -29,7 +29,7 @@ The file *requirements.txt* contains a list of these packages for easier install
 
 Trying out our method on images using the testing scripts doesn't require specific data preprocessing, however, if one wants to train using our code or evaluate on an entire set of images at once then it is necessary to prepare the data in the expected format. This can be done with the script **data_process.py**. The script has the following arguments:
 
-- `--dataset` Specifies which dataset should be processed or whether we want to split and existing dataset into patches for vessel segmentation. The supproted values are `fives`, `chase`, `patch`
+- `--dataset` Specifies which dataset should be processed or whether we want to split and existing dataset into patches for vessel segmentation. The supported values are `fives`, `chase`, `patch`
 - `--path_data` Directory of the [FIVES](https://doi.org/10.1038/s41597-022-01564-3) or [CHASE_DB1](https://researchdata.kingston.ac.uk/96/) dataset as downloaded from primary sources. For `--dataset=patch`, this should be the path directly to our dataset file (i.e. one of the files created through `--dataset=fives` or `--dataset=chase`)
 - `--path_roi` Path to a directory with region of interest bounding boxes. It should be the *rois* directory in this repository.
 - `--path_save` Path to a directory where the script saves the generated data files.
@@ -70,6 +70,10 @@ cd path/to/this/repository
 python data_process.py --dataset=patch --path_data=data/chase_train_256.npz --path_save=data --patch_stride=32
 python data_process.py --dataset=patch --path_data=data/fives_train_256.npz --path_save=data --patch_stride=64
 ```
+
+## Network weights
+
+We provide our trained network weights in the *Releases* section of GitHub. The directory **nn**, contained within the release file, should be placed in the location indicated by the directory tree above.
 
 ## Inpainting
 

@@ -1,0 +1,6 @@
+/rbv_env
+/wsl_rbv_env
+/data
+/results
+/nn
+**/__pycache__/

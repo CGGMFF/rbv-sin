@@ -25,6 +25,8 @@ The project was fully developed in **Python 3.10.11** with **Tensorflow** versio
 
 The file *requirements.txt* contains a list of these packages for easier installation with pip. In addition, we provide *requirements_frozen.txt*, which contains the exact versions of all packages installed in our project environment during verification of the code in this repository.
 
+The project was developed and tested on Windows 10 22H2, AMD64 architecture with native Python installation. Specifically, the networks were trained on Intel(R) Core(TM) i7-8750H CPU @ 2.20 GHz system with NVIDIA GeForce GTX 1060 (6 GB) GPU.
+
 ## Data preprocessing
 
 Trying out our method on images using the testing scripts doesn't require specific data preprocessing, however, if one wants to train using our code or evaluate on an entire set of images at once then it is necessary to prepare the data in the expected format. This can be done with the script **data_process.py**. The script has the following arguments:

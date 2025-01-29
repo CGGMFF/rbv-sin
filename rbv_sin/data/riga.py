@@ -185,7 +185,7 @@ class MessidorLoader(RigaLoader):
         self.descriptions = []
 
         def _collectGroup(image_path : Path, gt_experts : int) -> List[Dict[str, str]]:
-            pattern = re.compile("\Aimage.*{}.tif".format(MessidorLoader._PRIME))
+            pattern = re.compile("\\Aimage.*{}.tif".format(MessidorLoader._PRIME))
             prime_files : List[Path] = []
             for f in image_path.iterdir():
                 if f.is_file() and pattern.fullmatch(f.name):
@@ -235,7 +235,7 @@ class MagrabiaLoader(RigaLoader):
         self.descriptions = []
 
         def _collectGroup(image_path : Path, gt_experts : int) -> List[Dict[str, str]]:
-            pattern = re.compile("\Aimage.*{}.tif".format(MagrabiaLoader._PRIME))
+            pattern = re.compile("\\Aimage.*{}.tif".format(MagrabiaLoader._PRIME))
             prime_files : List[Path] = []
             for f in image_path.iterdir():
                 if f.is_file() and pattern.fullmatch(f.name):
@@ -312,7 +312,7 @@ class BinRushedLoader(RigaLoader):
         self.descriptions = []
 
         def _collectGroup(image_path : Path, gt_experts : int) -> List[Dict[str, str]]:
-            pattern = re.compile("\Aimage.*{}\..*".format(BinRushedLoader._PRIME))
+            pattern = re.compile("\\Aimage.*{}\\..*".format(BinRushedLoader._PRIME))
             prime_files : List[Path] = []
             for f in image_path.iterdir():
                 if f.is_file() and pattern.fullmatch(f.name):

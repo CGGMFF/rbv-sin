@@ -5,9 +5,9 @@ import tensorflow as tf
 class Conv2DWithBN(tf.keras.layers.Layer):
     """Custom convolution layer utilising batch normalisation."""
 
-    def __init__(self, filters, kernel_size, strides, padding, activation, dilation_rate=(1, 1), use_bias=False, trainable=True, name=None, dtype=None, dynamic=False, **kwargs):
+    def __init__(self, filters, kernel_size, strides, padding, activation, dilation_rate=(1, 1), use_bias=False, trainable=True, name=None, dtype=None, **kwargs):
         """Defines a normal convolution layer followed by batch normalisation."""
-        super().__init__(trainable, name, dtype, dynamic, **kwargs)
+        super().__init__(trainable=trainable, name=name, dtype=dtype, **kwargs)
         self.conv = tf.keras.layers.Conv2D(filters, kernel_size, strides, padding, activation=None, dilation_rate=dilation_rate, use_bias=use_bias)
         self.batchnorm = tf.keras.layers.BatchNormalization()
         self.activation = tf.keras.layers.Activation(activation)
@@ -22,9 +22,9 @@ class Conv2DWithBN(tf.keras.layers.Layer):
 class Conv2DTransposeWithBN(tf.keras.layers.Layer):
     """Custom transposed convolution layer utilising batch normalisation."""
 
-    def __init__(self, filters, kernel_size, strides, padding, activation, dilation_rate=(1, 1), use_bias=False, trainable=True, name=None, dtype=None, dynamic=False, **kwargs):
+    def __init__(self, filters, kernel_size, strides, padding, activation, dilation_rate=(1, 1), use_bias=False, trainable=True, name=None, dtype=None, **kwargs):
         """Defines a transposed convolution layer followed by batch normalisation."""
-        super().__init__(trainable, name, dtype, dynamic, **kwargs)
+        super().__init__(trainable=trainable, name=name, dtype=dtype, **kwargs)
         self.conv = tf.keras.layers.Conv2DTranspose(filters, kernel_size, strides, padding, activation=None, dilation_rate=dilation_rate, use_bias=use_bias)
         self.batchnorm = tf.keras.layers.BatchNormalization()
         self.activation = tf.keras.layers.Activation(activation)
@@ -39,9 +39,9 @@ class Conv2DTransposeWithBN(tf.keras.layers.Layer):
 class Conv2DOptBN(tf.keras.layers.Layer):
     """Custom convolution layer implementing optional batch normalisation."""
 
-    def __init__(self, filters, kernel_size, strides, padding, activation, dilation_rate=(1, 1), use_bias=False, batch_norm=False, trainable=True, name=None, dtype=None, dynamic=False, **kwargs):
+    def __init__(self, filters, kernel_size, strides, padding, activation, dilation_rate=(1, 1), use_bias=False, batch_norm=False, trainable=True, name=None, dtype=None, **kwargs):
         """Defines a traditional convolution layer that is optionally followed by batch noralisation if 'batch_norm' is true."""
-        super().__init__(trainable, name, dtype, dynamic, **kwargs)
+        super().__init__(trainable=trainable, name=name, dtype=dtype, **kwargs)
         if batch_norm:
             self.conv = Conv2DWithBN(filters, kernel_size, strides, padding, activation, dilation_rate=dilation_rate, use_bias=use_bias, trainable=self.trainable)
         else:
@@ -54,9 +54,9 @@ class Conv2DOptBN(tf.keras.layers.Layer):
 class Conv2DTransposeOptBN(tf.keras.layers.Layer):
     """Custom transposed convolution layer implementing optional batch normalisation."""
 
-    def __init__(self, filters, kernel_size, strides, padding, activation, dilation_rate=(1, 1), use_bias=False, batch_norm=False, trainable=True, name=None, dtype=None, dynamic=False, **kwargs):
+    def __init__(self, filters, kernel_size, strides, padding, activation, dilation_rate=(1, 1), use_bias=False, batch_norm=False, trainable=True, name=None, dtype=None, **kwargs):
         """Defines a traditional transposed convolution that is followed by batch normalisation if 'batch_norm' is true."""
-        super().__init__(trainable, name, dtype, dynamic, **kwargs)
+        super().__init__(trainable=trainable, name=name, dtype=dtype, **kwargs)
         if batch_norm:
             self.conv = Conv2DTransposeWithBN(filters, kernel_size, strides, padding, activation, dilation_rate=dilation_rate, use_bias=use_bias, trainable=self.trainable)
         else:
@@ -83,7 +83,7 @@ class SINSelfAttention(tf.keras.layers.Layer):
         - 'activation' - Activation applied to convolutions outside of the query and key.
         - 'batch_norm' - Whether the convolutions should be followed by batch normalisation.
         """
-        super().__init__(trainable, **kwargs)
+        super().__init__(trainable=trainable, **kwargs)
         self.ca_shape = ca_shape
         self.conv_key = Conv2DOptBN(inner_filters, kernel_size, strides, padding, tf.nn.elu, batch_norm=batch_norm, trainable=trainable)
         self.conv_query = Conv2DOptBN(inner_filters, kernel_size, strides, padding, tf.nn.elu, batch_norm=batch_norm, trainable=trainable)

@@ -2,6 +2,7 @@
 # RBV-SIN: Retinal blood vessel segmentation and inpainting networks with multi-level self-attention
 
 This repository contains the implementation of the paper ***Retinal blood vessel segmentation and inpainting networks with multi-level self-attention*** available at [https://doi.org/10.1016/j.bspc.2024.107343](https://doi.org/10.1016/j.bspc.2024.107343)
+*Please cite this paper if you use something from the repository.*
 
 ## Licence notice
 

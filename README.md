@@ -13,6 +13,8 @@ We adapted the FIVES retinal vessel segmentation dataset ([https://doi.org/10.10
 
 ## Python setup
 
+### Development environment
+
 The project was fully developed in **Python 3.10.11** with **Tensorflow** version **2.10.0** for neural network optimisation. We used the standard packages written in the following list:
 
 - numpy
@@ -25,7 +27,20 @@ The project was fully developed in **Python 3.10.11** with **Tensorflow** versio
 
 The file *requirements.txt* contains a list of these packages for easier installation with pip. In addition, we provide *requirements_frozen.txt*, which contains the exact versions of all packages installed in our project environment during verification of the code in this repository.
 
+### Testing system
+
 The project was developed and tested on Windows 10 22H2, AMD64 architecture with native Python installation. Specifically, the networks were trained on Intel(R) Core(TM) i7-8750H CPU @ 2.20 GHz system with NVIDIA GeForce GTX 1060 (6 GB) GPU.
+
+### Compatibility update (30. 1. 2025)
+
+The source code was updated, and some bugs were fixed to make the project compatible with **Python 3.12.8** and **Tensorflow 2.18.0**. This update necessitated changing the format of saved network weights to **.h5**. The re-saved weights are available as a secondary release. A script `resave.py`, which can be used to re-save network weights was added. Note that when loading models (or training them), the names of the weight files are hard-coded in `rbv_sin/nn/inp_trainer.py` and `rbv_sin/nn/seg_trainer.py`. These names must be changed to something ending with `.weights.h5` to train with **Tensorflow 2.18.0**. 
+
+Compatibility with the versions used in development was preserved, and this update was tested with the following:
+
+- Windows Native (GPU), Python 3.10.11, Tensorflow 2.10.0
+- Windows Native (CPU), Python 3.12.8, Tensorflow 2.18.0
+- Windows WSL Ubuntu 20.04 (CPU), Python 3.10.16, Tensorflow 2.10.0
+- Windows WSL Ubuntu 20.04 (CPU), Python 3.12.8, Tensorflow 2.18.0
 
 ## Data preprocessing
 

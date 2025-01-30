@@ -16,7 +16,7 @@ from rbv_sin.nn.network_trainer import NetworkTrainer
 class VesselInpaintingTrainer(NetworkTrainer):
     """Implementation of the custom network trainer for blood vessel inpainting."""
 
-    CP_GENERATOR_NAME = "inp_generator_weights"
+    CP_GENERATOR_NAME = "inp_generator_weights.h5"
 
     def __init__(self, network_inputs: Union[Sequence[Tuple[int, ...]], Tuple[int, ...], Dict[str, Tuple[int, ...]]]) -> None:
         """
@@ -206,13 +206,19 @@ class VesselInpaintingTrainer(NetworkTrainer):
         self.cp_show = cp_show
         self.cp_examples = (self.cp_train_source is not None) and (self.cp_target_source is not None) and (self.cp_labels is not None)
 
-    def _saveModels(self, model_dir_path: Path) -> None:
-        """Saves the model weights in the given directory."""
-        self.generator.save_weights(Path(model_dir_path, VesselInpaintingTrainer.CP_GENERATOR_NAME))
+    def _ensureGeneratorName(self, model_name : str) -> str:
+        """Returns the default name if 'model_name' is None."""
+        return VesselInpaintingTrainer.CP_GENERATOR_NAME if model_name is None else model_name
 
-    def _loadModels(self, model_dir_path: Path) -> None:
+    def _saveModels(self, model_dir_path: Path, model_name : str = None) -> None:
+        """Saves the model weights in the given directory."""
+        self.generator.save_weights(Path(model_dir_path, self._ensureGeneratorName(model_name)))
+
+    def _loadModels(self, model_dir_path: Path, model_name : str = None) -> None:
         """Loads the model weights from the given directory."""
-        self.generator.load_weights(Path(model_dir_path, VesselInpaintingTrainer.CP_GENERATOR_NAME))
+        # Run the model to build connections before loading the weights (this is necessary in some/newer versions).
+        _ = self.generator(tf.zeros([1] + list(self.network_inputs["generator"])))
+        self.generator.load_weights(Path(model_dir_path, self._ensureGeneratorName(model_name)))
 
     def _saveExamples(self, cp_dir: Path) -> None:
         """

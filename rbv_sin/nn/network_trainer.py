@@ -143,7 +143,7 @@ class NetworkTrainer:
         Returns:
         - Returns the network results.
         """
-        batch_indices = np.arange(0, images.shape[0], batch_size)
+        batch_indices = np.arange(batch_size, images.shape[0], batch_size)
         split_data = np.split(images, batch_indices)
 
         results = []
